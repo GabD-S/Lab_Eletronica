@@ -1,0 +1,14 @@
+# OS
+desktop.ini
+.DS_Store
+Thumbs.db
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+*.synctex.gz

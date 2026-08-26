@@ -1,0 +1,79 @@
+	\documentclass[10pt,conference]{IEEEtran}
+
+\usepackage{cite}
+\ifCLASSINFOpdf
+   \usepackage[pdftex]{graphicx}
+   \graphicspath{{figs/}}
+   \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+   \usepackage[dvips]{graphicx}
+   \graphicspath{{../figs/}}
+   \DeclareGraphicsExtensions{.eps}
+\fi
+
+\usepackage[cmex10]{amsmath}
+\interdisplaylinepenalty=2500
+\usepackage{amsthm}
+\newtheorem{definition}{Definition}
+\usepackage{algorithmic}
+\usepackage{array}
+\usepackage{subcaption}
+\usepackage{url}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{listings}
+
+% corrija hifenação aqui
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+\begin{document}
+\title{Modelo de Relatório}
+
+\newif\iffinal
+\finalfalse
+\finaltrue
+\newcommand{\jemsid}{99999}
+
+\iffinal
+\author{\IEEEauthorblockN{Autor}
+\IEEEauthorblockA{Bacharelado em Física \\
+Instituto de Física\\
+Universidade de Brasília \\
+Email: aluno@aluno.unb.br}}
+\fi
+
+
+\maketitle
+
+\begin{abstract}
+Um resumo de 100-200 palavras. Deve conter, brevemente, motivação, problema estudado, solução proposta/implementada e resultados obtidos.
+\end{abstract}
+\IEEEpeerreviewmaketitle
+
+\section{Introdução}
+
+A introdução deve responder às seguintes perguntas de forma concisa e clara:
+
+\begin{enumerate}
+\item Qual é o problema estudado e o porquê de estudá-lo?
+\item Qual a solução proposta e suas limitações?
+\end{enumerate}
+
+Na introdução é importante detalhar o problema proposto, quais as dificuldades em resolvê-lo a partir da solução proposta e mostrar de maneira concisa como será dada a análise do problema. Dica: apresentação, desenvolvimento, clímax, resolução. (Tamanho de texto: meia lauda).
+
+\section{Metodologia}
+
+Neste local do texto você deve descrever a ideia que foi usada para criar o código e não colocar o código em si. Equações matemáticas, fluxogramas e toda e qualquer forma de apresentar a metodologia utilizada deve estar contida nessa seção do relatório. (Tamanho de texto: meia lauda).
+
+\section{Resultados e Discussão}
+
+Descreva nesta seção os resultados encontrados de maneira detalhada e clara. Dica: ``do amplo para o específico'' ``mostrar e explicar'' (Tamanho de texto: uma lauda).
+
+\section{Conclusão}
+
+``So what? Statement'' (Tamanho de texto: meia lauda)
+
+\end{document}
+
+

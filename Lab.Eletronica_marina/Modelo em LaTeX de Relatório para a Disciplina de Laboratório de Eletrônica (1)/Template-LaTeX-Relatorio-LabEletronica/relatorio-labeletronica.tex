@@ -1,0 +1,146 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx, color, xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage[brazil, english]{babel}
+\setlength{\headheight}{1.5cm}
+
+\fancypagestyle{plain}{%\fancyhf{}%}
+\lhead{\includegraphics[width=5cm,height=2cm]{Template-LaTeX-Relatorio-LabEletronica/logoFT.png}}
+\rhead{\includegraphics[width=5cm,height=2cm]{Template-LaTeX-Relatorio-LabEletronica/logoUnB.png}}
+
+\renewcommand{\headrulewidth}{1pt}%
+}
+
+% Changing the caption and 'References' names to Portuguese.
+\addto\captionsenglish{
+  \renewcommand{\figurename}{Figura}
+  \renewcommand{\tablename}{Tabela}
+  \renewcommand{\refname}{Referências bibliográficas}
+}
+
+% to-do: Using fontenc with T1 font encoding allows \hyphenation to take words with accents
+% as arguments. However, fontenc with T1 mess up with words containing 'ã' in all \subsection{}
+% commands.
+% If someone knows how to fix it, tell me!
+%
+%\usepackage[T1]{fontenc}
+
+% Put the words not correctly hyphenated down here. Words with accents must
+% be manually hyphenated in the text itself using the '\-' separator. See the examples
+% throughout this template.
+\hyphenation{co-e-ren-te u-sa-do de-li-mi-ta-do-res a-cer-ca va-lo-res cor-res-pon-den-te re-fe-ren-ci-a-das co-lu-na co-lu-nas em-bo-ra u-ti-li-da-de pro-ce-di-men-to ex-pe-ri-men-to fi-gu-ras}
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+\usepackage[breaklinks=true,bookmarks=true]{hyperref}
+
+\cvprfinalcopy % *** Uncomment this line for the final submission
+
+%\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+%\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+% Pages are numbered in submission mode, and unnumbered in camera-ready
+% \ifcvprfinal\pagestyle{empty}\fi
+%\setcounter{page}{1}
+
+
+\begin{document}
+%%%%%%%%% TITLE
+\title{Modelo em \LaTeX\ de Relatório para a Disciplina de Laboratório de Eletrônica}
+
+\author{Aluno 1\\
+% To save space, use either the email address or home page, not both
+{\tt\small aluno1@aluno.unb.br}\\
+% Matrícula do primeiro autor
+{\tt\small 00/0000000}\\
+% Turma
+{\tt\small Turma A/D}
+\and
+Aluno 2\\
+{\tt\small aluno2@aluno.unb.br}\\
+% Matrícula do segundo autor
+{\tt\small 00/0000000}\\
+% Turma
+{\tt\small Turma A/D}
+\and
+Aluno 3\\
+{\tt\small aluno3@aluno.unb.br}\\
+% Matrícula do terceiro autor, se houver
+{\tt\small 00/0000000}\\
+% Turma
+{\tt\small Turma A/D}
+}
+
+\maketitle
+%\thispagestyle{empty}
+
+%%%%%%%%% OBJETIVO
+
+\begin{objetivo}
+% Resumo com não mais de 250 palavras.
+Aqui deve ser o objetivo do relatório.
+
+\end{objetivo}
+
+%%%%%%%%% BODY TEXT
+\section{Introdução}
+Aqui deve ser apresentada uma pequena introdução de cada um dos assuntos abordados pelo roteiro.
+
+%------------------------------------------------------------------------
+\section{Fundamentação teórica}
+
+A {\em Fundamentação teórica} deve apresentar a teoria necessária para a compreensão, execução e análise do experimento. Nesta seção têm de ser incluídas todas as equações pertinentes, entretanto, não convém que valores numéricos sejam introduzidos. Os valores específicos de resistência elétrica, capacitância, indutância, etc., utilizados em la\-bo\-ra\-tó\-rio podem ser apresentados nas seções {\em Procedimento experimental}, {\em Simulações} e {\em Resultados e análises}. Mais detalhes serão dados nos tópicos a seguir.
+
+%-------------------------------------------------------------------------
+\subsection{Como montar as equações em \LaTeX}
+
+\begin{equation} \label{eq:imped}
+\mathbf{Z} = R + j(X_L - X_C) \, ,
+\end{equation}
+
+\noindent
+onde $X_L$ e $X_C$ correspondem aos módulos das reatâncias indutiva e capacitiva. Estas últimas podem ser calculadas pelas Eqs.~\eqref{eq:x_L} e~\eqref{eq:x_C}, respectivamente:
+
+\begin{equation} \label{eq:x_L}
+X_L = \omega L \, ,
+\end{equation}
+
+\begin{equation} \label{eq:x_C}
+X_C = \frac{1}{\omega C} \, .
+\end{equation} 
+
+%-------------------------------------------------------------------------
+\section{Procedimento experimental}
+
+Esta seção deve descrever os procedimentos adotados quando da execução do experimento. Nesse ponto convém apresentar os diagramas dos circuitos montados, os valores dos resistores, capacitores, indutores, etc. É interessante descrever os equipamentos utilizados e as ações efetuadas ao longo da atividade laboratorial. As configurações de ajuste dos equipamentos, os parâmetros de frequência, níveis de tensão e corrente, entre outros, também precisam ser incluídos nesta seção. Enfim, os alunos devem expor todas as informações necessárias para que o experimento possa ser reproduzido por outro grupo, de qualquer laboratório do mundo, em qualquer ocasião. A reprodutibilidade de resultados obtidos empiricamente é fundamental na ciência.
+
+%-------------------------------------------------------------------------
+\section{Simulações}
+
+A seção {\em Simulações} deve conter as simulações computacionais requeridas no roteiro do experimento. 
+
+%-------------------------------------------------------------------------
+\section{Resultados e análises}
+
+A seção {\em Resultados e análises} deve apresentar os resultados obtidos após a execução do experimento em laboratório, bem como as análises dos mesmos, comparando-os com os valores obtidos nas simulações, dados na seção anterior, e com aqueles calculados segundo a teoria.  
+
+%------------------------------------------------------------------------
+\section{Conclusão}
+
+A seção {\em Conclusão} deve conter as conclusões alcançadas ao fim do experimento, as lições aprendidas, os problemas não resolvidos e as possíveis soluções que poderiam ser implementadas em experimentos futuros. Os alunos devem finalizar tratando do alcance, ou não, dos objetivos e da utilidade do experimento tendo em vista as aplicações e o contexto no qual se insere o tema do roteiro, os quais devem ter sido apresentados na seção {\em Introdução}.
+
+{\small
+\bibliography{egbib}
+\bibliographystyle{ieee_fullname}
+}
+
+\end{document}

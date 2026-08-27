@@ -1,10 +1,18 @@
 \documentclass[11pt,a4paper]{article}
 \input{estilo-relatorio}
-\usepackage[american]{circuitikz}
 
 \roteiro{1}{Simulação de Circuitos: Introdução ao LTspice}
 \aturma{04}
 \autorum{Gabriel de Sousa}{211056000}
+
+\usepackage{placeins}
+\renewcommand{\topfraction}{0.92}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.08}
+\renewcommand{\floatpagefraction}{0.75}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{5}
 
 \begin{document}
 \capa
@@ -32,9 +40,8 @@ suficiente para amortecer a energia armazenada.
 
 O LTspice permite verificar essas condições antes da montagem. Neste roteiro são usadas análises de
 ponto de operação, varredura DC, resposta em frequência, resposta ao degrau e conteúdo espectral.
-Os esquemáticos deste documento foram redesenhados em Circuitikz a partir dos arquivos
-\texttt{item\_1.asc} a \texttt{item\_6.asc}; os gráficos foram reconstruídos numericamente com os
-mesmos modelos ideais e receberam cores e fundo próximos aos do visualizador do LTspice.
+Os esquemáticos e os gráficos deste documento são capturas de tela do próprio LTspice, obtidas
+dos arquivos \texttt{item\_1.asc} a \texttt{item\_6.asc}.
 
 O objetivo é dimensionar e caracterizar as topologias definidas nos arquivos do autor, comparando as
 previsões analíticas com as respostas de projeto. A Seção 2 apresenta as relações teóricas, a Seção 3
@@ -152,22 +159,23 @@ $R$ central do RLC & \SI{12}{\kilo\ohm} & \SI{12}{\kilo\ohm} & 0\% \\
 
 \subsection{Simulação de projeto, uma por integrante}
 
-Os itens 1 e 2 usam o divisor da Figura~\ref{fig:divisor}. A diretiva
+Os itens 1 e 2 usam o divisor das Figuras~\ref{fig:divisor-op} e \ref{fig:divisor}. A diretiva
 \texttt{.step param RL list 1000 1000meg} representa a condição carregada e a aproximação de
 circuito aberto. O item 1 executa \texttt{.op}; o item 2 varre a fonte de 0 a \SI{15}{\volt} em
 passos de \SI{0,1}{\volt}.
 
 \begin{figure}[htb]
 \centering
-\begin{circuitikz}[scale=1.05]
-\draw (0,0) node[ground]{} to[V,l_={$V_1$}] (0,3)
-  to[R,l_={$R_1$}] (3,3) coordinate(out)
-  to[R,l_={$R_2$}] (3,0) -- (0,0);
-\draw (out) -- (5,3) to[R,l_={$R_L$}] (5,0) -- (3,0);
-\draw (out) node[circ]{} node[above]{$v_{carga}$};
-\node[align=left] at (2.5,-0.8) {\texttt{R1=1.2k; R2=2.2k}\\\texttt{.step param RL list 1000 1000meg}};
-\end{circuitikz}
-\caption{Divisor resistivo dos itens 1 e 2, com a carga parametrizada.}
+\includegraphics[width=.62\linewidth]{figuras/item_1_ltspice_op_esquematico_corte.png}
+\caption{Esquemático do divisor resistivo no LTspice com a diretiva \texttt{.op}
+(\texttt{item\_1.asc}), com a carga parametrizada.}
+\label{fig:divisor-op}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.85\linewidth]{figuras/2.png}
+\caption{Mesmo divisor com a diretiva \texttt{.dc} ativa (\texttt{item\_2.asc}).}
 \label{fig:divisor}
 \end{figure}
 
@@ -177,34 +185,28 @@ referência.
 
 \begin{figure}[htb]
 \centering
-\begin{circuitikz}[scale=1.05]
-\draw (0,0) node[ground]{} to[V,l_={$V_1\;(AC\;1)$}] (0,2.8)
-  to[R,l_={$R_1=3{,}9\,\mathrm{k}\Omega$}] (3.4,2.8) coordinate(out)
-  to[C,l_={$C_1=100\,\mathrm{nF}$}] (3.4,0) -- (0,0);
-\draw (out) node[circ]{} node[above]{$v_{out}$};
-\node at (1.7,-0.7) {\texttt{.ac dec 100 3.88 38800}};
-\end{circuitikz}
-\caption{Filtro RC passa-baixas do item 3.}
+\includegraphics[width=.85\linewidth]{figuras/3.png}
+\caption{Esquemático do filtro RC passa-baixas no LTspice (\texttt{item\_3.asc}).}
 \label{fig:rc-ac}
 \end{figure}
 
-Nos itens 4 e 5, o RLC da Figura~\ref{fig:rlc} usa
+Nos itens 4 e 5, o RLC das Figuras~\ref{fig:rlc-esq-tran} e \ref{fig:rlc-esq-ac} usa
 \texttt{.step param R list 4700 12000 22000}. O item 4 recebe um degrau e executa
 \texttt{.tran 300u}; o item 5 usa amplitude AC de \SI{1}{\volt} e
 \texttt{.ac dec 100 159.16 1591550}.
 
 \begin{figure}[htb]
 \centering
-\begin{circuitikz}[scale=1.0]
-\draw (0,0) node[ground]{} to[V,l_={$V_1$}] (0,2.8)
-  to[R,l_={$R_1=\{R\}$}] (2.4,2.8)
-  to[L,l_={$L_1=100\,\mathrm{mH}$}] (5.0,2.8) coordinate(out)
-  to[C,l_={$C_1=1\,\mathrm{nF}$}] (5.0,0) -- (0,0);
-\draw (out) node[circ]{} node[above]{$v_{out}$};
-\node at (2.5,-0.7) {\texttt{.step param R list 4700 12000 22000}};
-\end{circuitikz}
-\caption{RLC série dos itens 4 e 5, com saída sobre o capacitor.}
-\label{fig:rlc}
+\includegraphics[width=.85\linewidth]{figuras/4.png}
+\caption{Esquemático do RLC série no LTspice para a análise transiente (\texttt{item\_4.asc}).}
+\label{fig:rlc-esq-tran}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.85\linewidth]{figuras/5.png}
+\caption{Esquemático do RLC série no LTspice para a resposta em frequência (\texttt{item\_5.asc}).}
+\label{fig:rlc-esq-ac}
 \end{figure}
 
 O item 6 reutiliza o RC, mas com
@@ -213,14 +215,8 @@ primeiros, limita o passo a \SI{8,591}{\micro\second} e desliga a compressão do
 
 \begin{figure}[htb]
 \centering
-\begin{circuitikz}[scale=1.05]
-\draw (0,0) node[ground]{} to[sV,l_={$V_1$}] (0,2.8)
-  to[R,l_={$R_1=3{,}9\,\mathrm{k}\Omega$}] (3.4,2.8) coordinate(out)
-  to[C,l_={$C_1=100\,\mathrm{nF}$}] (3.4,0) -- (0,0);
-\draw (out) node[circ]{} node[above]{$v_{out}$};
-\node[align=center] at (1.7,-0.75) {\texttt{.tran 0 51.55m 12.89m 8.591u}\\\texttt{.options plotwinsize=0}};
-\end{circuitikz}
-\caption{Filtro RC excitado por onda quadrada no item 6.}
+\includegraphics[width=.85\linewidth]{figuras/6.png}
+\caption{Esquemático do filtro RC excitado por onda quadrada no LTspice (\texttt{item\_6.asc}).}
 \label{fig:rc-pulse}
 \end{figure}
 
@@ -228,7 +224,7 @@ primeiros, limita o passo a \SI{8,591}{\micro\second} e desliga a compressão do
 
 \subsection{Projeto de cada integrante}
 
-No ponto de operação, o divisor fornece os valores da Tabela~\ref{tab:op}. A varredura da
+No ponto de operação, o divisor fornece os valores da Tabela~\ref{tab:op}, lidos das janelas da Figura~\ref{fig:op}. A varredura da
 Figura~\ref{fig:dc} confirma que ambas as saídas são lineares e que a razão entre elas permanece
 constante.
 
@@ -247,8 +243,17 @@ Corrente da fonte & \SI{5,298}{\milli\ampere} & \SI{2,941}{\milli\ampere} \\
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=.9\linewidth]{figuras/grafico-item-2-dc.png}
-\caption{Varredura DC reconstruída com aparência próxima ao visualizador do LTspice.}
+\includegraphics[width=.49\linewidth]{figuras/item_1_ltspice_op_resultado_carga_corte.png}\hfill
+\includegraphics[width=.49\linewidth]{figuras/item_1_ltspice_op_resultado_sem_carga_corte.png}
+\caption{Janelas de ponto de operação do LTspice (\texttt{item\_1.asc}): à esquerda com
+$R_L=\SI{1}{\kilo\ohm}$, à direita em circuito aberto.}
+\label{fig:op}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\linewidth]{figuras/item_2_ltspice_corte.png}
+\caption{Varredura DC do divisor no LTspice (\texttt{item\_2.asc}): $V(v_{carga})$ com $R_L=\SI{1}{\kilo\ohm}$ e em circuito aberto.}
 \label{fig:dc}
 \end{figure}
 
@@ -258,8 +263,8 @@ frequência, o ganho chega a \SI{-20,043}{\decibel}.
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=.9\linewidth]{figuras/grafico-item-3-bode.png}
-\caption{Magnitude e fase do filtro RC, com referência e corte efetivo destacados.}
+\includegraphics[width=\linewidth]{figuras/item_3_ltspice_corte.png}
+\caption{Resposta em frequência do filtro RC no LTspice (\texttt{item\_3.asc}): magnitude em \si{\decibel} e fase de $V(v_{out})$.}
 \label{fig:bode-rc}
 \end{figure}
 
@@ -282,15 +287,15 @@ ao degrau e em frequência aparecem nas Figuras~\ref{fig:rlc-tran} e \ref{fig:rl
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=.9\linewidth]{figuras/grafico-item-4-transiente.png}
-\caption{Resposta ao degrau do RLC para os três valores de resistência.}
+\includegraphics[width=\linewidth]{figuras/item_4_ltspice_vout_corte.png}
+\caption{Resposta ao degrau do RLC no LTspice (\texttt{item\_4.asc}): $V(Vout)$ para $R=\SI{4,7}{\kilo\ohm}$, \SI{12}{\kilo\ohm} e \SI{22}{\kilo\ohm}.}
 \label{fig:rlc-tran}
 \end{figure}
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=.9\linewidth]{figuras/grafico-item-5-bode.png}
-\caption{Resposta em frequência do RLC para os três valores de resistência.}
+\includegraphics[width=\linewidth]{figuras/item_5_ltspice_corte.png}
+\caption{Resposta em frequência do RLC no LTspice (\texttt{item\_5.asc}) para os três valores de resistência.}
 \label{fig:rlc-bode}
 \end{figure}
 
@@ -299,8 +304,8 @@ e a Figura~\ref{fig:fft} mostram que a atenuação aumenta com a ordem harmônic
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=.9\linewidth]{figuras/grafico-item-6-tempo.png}
-\caption{Entrada quadrada e saída do filtro RC em regime permanente.}
+\includegraphics[width=\linewidth]{figuras/item_6_ltspice_tempo_real_corte.png}
+\caption{Transiente do item 6 no LTspice (\texttt{item\_6.asc}): entrada quadrada $V(vin)$ e saída $V(vout)$ em regime permanente.}
 \label{fig:pulse}
 \end{figure}
 
@@ -322,11 +327,12 @@ e a Figura~\ref{fig:fft} mostram que a atenuação aumenta com a ordem harmônic
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=.9\linewidth]{figuras/grafico-item-6-espectro.png}
-\caption{Espectro da entrada quadrada e das componentes após o filtro RC.}
+\includegraphics[width=\linewidth]{figuras/item_6_ltspice_fft_corte.png}
+\caption{Transformada rápida de Fourier de $V(vout)$ no LTspice (\texttt{item\_6.asc}), com as harmônicas ímpares decrescendo e a atenuação imposta pelo filtro RC.}
 \label{fig:fft}
 \end{figure}
 
+\FloatBarrier
 \section{Discussão}
 
 No divisor, $R_{th}=\SI{776,47}{\ohm}$ não é desprezível diante de $R_L=\SI{1}{\kilo\ohm}$.
@@ -362,6 +368,7 @@ quadrada. Os resultados são coerentes com os modelos lineares ideais e com os v
 nos arquivos do autor. A principal limitação é a ausência de medições reais, que impede avaliar
 tolerâncias e efeitos parasitas.
 
+\FloatBarrier
 \section{Referências}
 
 \begin{referencias}

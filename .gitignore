@@ -12,3 +12,9 @@ Thumbs.db
 *.bbl
 *.blg
 *.synctex.gz
+
+# LTspice simulation artifacts
+*.raw
+*.op.raw
+*.net
+*.fft

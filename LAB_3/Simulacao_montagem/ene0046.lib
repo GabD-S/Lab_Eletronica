@@ -1,0 +1,132 @@
+**********************************************************************
+* ENE0046  Laboratorio de Eletronica          NanoEng, UnB, 2026/2
+*
+* Amplificadores operacionais usados nos roteiros da disciplina.
+*
+* ATENCAO: as duas pecas NAO tem a mesma ordem de terminais. Cada
+* fabricante escreveu a sua, e os modelos estao aqui como vieram.
+*
+*   LM741   nao inversora, inversora, V+, V-, saida
+*   TL064   inversora, saida, nao inversora, V+, V-
+*
+* Cada simbolo precisa do SpiceOrder correspondente ao seu subcircuito.
+* No esquematico, Prefix X, Value LM741 ou TL064, ModelFile ene0046.lib.
+**********************************************************************
+
+**********************************************************
+*            (c) National Semiconductor, Inc.            *
+*        Models developed and under copyright by:        *
+*              National Semiconductor, Inc.              *
+*                                                        *
+*   Reproduced with permission of National Semiconductor *
+*   Corporation.                                         *
+*                                                        *
+*   The models and subcircuits in this file are provided *
+*   as is, without any warranties of any kind. National  *
+*   Semiconductor does not assume any responsibility for *
+*   the use of this file, and specifically disclaims all *
+*   warranties, including the implied warranties of      *
+*   merchantability or fitness for any particular        *
+*   purpose.                                             *
+*                                                        *
+**********************************************************
+*
+*LM741 OPERATIONAL AMPLIFIER MACRO-MODEL
+*
+* connections:      non-inverting input
+*                   |   inverting input
+*                   |   |   positive power supply
+*                   |   |   |   negative power supply
+*                   |   |   |   |   output
+*                   |   |   |   |   |
+.SUBCKT LM741       1   2  99  50  28
+IOS 2 1 20N
+R1 1 3 250K
+R2 3 2 250K
+I1 4 50 100U
+R3 5 99 517
+R4 6 99 517
+Q1 5 2 4 QX741
+Q2 6 7 4 QX741
+C4 5 6 60.3614P
+I2 99 50 1.6MA
+BOS 7 1 v= 1E-3 + 1*v(16,49)
+R8 99 49 40K
+R9 49 50 40K
+V2 99 8 1.63
+D1 9 8 DX741
+D2 10 9 DX741
+V3 10 50 1.63
+EH 99 98 99 49 1
+G1 98 9 5 6 2.1E-3
+R5 98 9 95.493MEG
+C3 98 9 333.33P
+G3 98 15 9 49 1E-6
+R12 98 15 1MEG
+C5 98 15 5.3052E-15
+G4 98 16 3 49 3.1623E-8
+L2 98 17 530.5M
+R13 17 16 1K
+B6 50 99 i= 450E-6 + 1*i(V6)
+E1 99 23 99 15 1
+R16 24 23 25
+D5 26 24 DX741
+V6 26 22 0.65V
+R17 23 25 25
+D6 25 27 DX741
+V7 22 27 0.65V
+V5 22 21 0.18V
+D4 21 15 DX741
+V4 20 22 0.18V
+D3 15 20 DX741
+L3 22 28 100P
+RL3 22 28 100K
+.ENDS LM741
+.MODEL DX741 D(IS=1E-15)
+.MODEL QX741 NPN(BF=625)
+
+.SUBCKT TL064 1 3 2 4 5
+.MODEL MDTH D IS=1E-8 KF=1.175758E-14 CJO=10F
+CIP 2 5 1.000000E-12
+CIN 1 5 1.000000E-12
+EIP 10 5 2 5 1
+EIN 16 5 1 5 1
+RIP 10 11 4.000000E+00
+RIN 15 16 4.000000E+00
+RIS 11 15 9.848265E-01
+DIP 11 12 MDTH 400E-12
+DIN 15 14 MDTH 400E-12
+VOFP 12 13 DC 0
+VOFN 13 14 DC 0
+IPOL 13 5 6.500000E-05
+CPS 11 15 2.981372E-08
+DINN 17 13 MDTH 400E-12
+VIN 17 5 3.000000e+00
+DINR 15 18 MDTH 400E-12
+VIP 4 18 3.000000E+00
+FCP 4 5 VOFP 2.076923E+00
+FCN 5 4 VOFN 2.076923E+00
+FIP 5 19 VOFP 5.384615E+02
+FIN 5 19 VOFN 5.384615E+02
+GVNEG 5 19 5 13 1.311224E-06
+GVPOS 5 19 4 13 1.311224E-06
+RG1 19 5 1.626871E+05
+RG2 19 4 1.626871E+05
+CC 19 29 1.000000E-08
+HZTP 30 29 VOFP 2.558489E+03
+HZTN 5 30 VOFN 2.558489E+03
+DOPM 19 22 MDTH 400E-12
+DONM 21 19 MDTH 400E-12
+HOPM 22 28 VOUT 3.750000E+03
+VIPM 28 4 9.000000E+01
+HONM 21 27 VOUT 9.000000E+03
+VINM 5 27 9.000000E+01
+EOUT 26 23 19 5 1
+VOUT 23 5 0
+ROUT 26 3 100
+COUT 3 5 1.000000E-12
+DOP 19 25 MDTH 400E-12
+VOP 4 25 2.290897E+00
+DON 24 19 MDTH 400E-12
+VON 24 5 2.290897E+00
+.ENDS TL064

@@ -3,7 +3,7 @@
 Repositório de trabalho da disciplina: roteiros, simulações no LTspice, pré-relatórios
 e relatórios em LaTeX.
 
-Aluno: **Gabriel de Sousa** — matrícula **211056000** — Turma 04.
+Aluno: **Gabriel de Sousa** — matrícula **211056000** — Turma 04 — **Equipe 1**.
 
 ## Estrutura
 
@@ -204,8 +204,14 @@ O relatório traz a simulação de projeto **de cada integrante**, a montagem em
 com os valores medidos dos componentes, a simulação da montagem e a medição.
 Use `relatorio1.pdf` (LAB_1) como referência de estrutura, profundidade e tom.
 
-Instrumentos da bancada: fonte E3631A, gerador 33220A, osciloscópio DSO1002A,
-multímetro 34401A.
+### Instrumentos da bancada
+
+- **Osciloscópio Agilent Technologies DSO1002A:** 60 MHz, 2 GSa/s, dois canais; menu em português (**Acoplamento**, **Limite Banda**, **Ponta prova**).
+- **Multímetro digital Agilent 34410A:** 6½ dígitos, interface LXI. Os 0,032 mV DC vistos na foto não são uma especificação nem uma medição do Lab 4.
+- **Fonte Agilent E3631A:** saída tripla, 0 a 6 V/5 A e 0 a ±25 V/1 A; usar +15 V, COM e −15 V para alimentação simétrica e conferir **CV**.
+- **Gerador Agilent 33220A:** gerador de funções/formas arbitrárias de 20 MHz com LXI. A foto mostra 14,60 Vpp em **High Z**, mas a amplitude de cada ensaio é a do roteiro, não a da foto.
+
+No **Roteiro 4**, a simulação permite resistores E12 de **1 kΩ a 2,2 MΩ**, no máximo dois em série por perna. A bancada usa o estoque definido na seção 4 do roteiro e **um resistor por perna**. Essas regras específicas prevalecem sobre a faixa geral de 1 kΩ a 82 kΩ acima. A **versão do roteiro de 01/10/2026** mudou a sequência e os valores de bancada: a **Equipe 1** usa `RG = 2,2 kΩ` entre INA118 pinos 1 e 8; um canal do TL064 como seguidor; outro com **33 kΩ entre pinos 7–6 e 820 Ω do pino 6 ao GND**; a saída usa **1 kΩ e 2,2 µF**. O número da equipe foi informado pelo aluno e é distinto da Turma 04. Procedimento: [LAB_4/manual-bancada.md](LAB_4/manual-bancada.md).
 
 ## Git
 
